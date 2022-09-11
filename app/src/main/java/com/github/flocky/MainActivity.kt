@@ -98,7 +98,7 @@ fun Screen(paddingValues: PaddingValues) {
             onTextChanged = {
                 bankFormViewModel.onEvent(UIEvent.AccountNumberChanged(it))
             },
-            isError = state.hasAccountNumberError,
+            isError = state.accountNumber.hasAccountNumberValidationError,
             onNext = {
                 localFocus.moveFocus(FocusDirection.Down)
             },
@@ -110,7 +110,7 @@ fun Screen(paddingValues: PaddingValues) {
             onTextChanged = {
                 bankFormViewModel.onEvent(UIEvent.AccountNameChanged(it))
             },
-            isError = state.hasNameError,
+            isError = state.accountName.hasAccountNameValidationError,
             onNext = {
                 localFocus.moveFocus(FocusDirection.Down)
             },
@@ -122,7 +122,7 @@ fun Screen(paddingValues: PaddingValues) {
             onTextChanged = {
                 bankFormViewModel.onEvent(UIEvent.PANNumberChanged(it))
             },
-            isError = state.hasPANError,
+            isError = state.panNumber.hasPanNumberValidationError,
             onNext = {
                 localFocus.moveFocus(FocusDirection.Down)
             },

@@ -6,30 +6,30 @@ import androidx.compose.ui.text.input.KeyboardType
 data class UIState(
     val accountNumber: AccountNumber = AccountNumber(),
     val panNumber: PANNumber = PANNumber(),
-    val accountName: AccountName = AccountName(),
-    val hasAccountNumberError: Boolean = false,
-    val hasNameError: Boolean = false,
-    val hasPANError: Boolean = false
+    val accountName: AccountName = AccountName()
 )
 
 sealed class ComponentProps(
     var value: String = "",
     val label: String = "",
     val length: Int = 0,
-    open val keyboardType: KeyboardType,
-    val keyboardCapitalization: KeyboardCapitalization = KeyboardCapitalization.None
+    val keyboardType: KeyboardType,
+    val keyboardCapitalization: KeyboardCapitalization = KeyboardCapitalization.None,
+    val hasValidationError: Boolean = false
 )
 
 data class AccountNumber(
     val accountNumber: String = "",
     val accountNumberLabel: String = AccountNumberLabel,
     val accountNumberLength: Int = 10,
-    val accountNumberKeyboardType: KeyboardType = KeyboardType.Number
+    val accountNumberKeyboardType: KeyboardType = KeyboardType.Number,
+    val hasAccountNumberValidationError: Boolean = false
 ) : ComponentProps(
     accountNumber,
     accountNumberLabel,
     accountNumberLength,
-    accountNumberKeyboardType
+    accountNumberKeyboardType,
+    hasValidationError = hasAccountNumberValidationError
 )
 
 data class AccountName(
@@ -37,13 +37,15 @@ data class AccountName(
     val accountNameLabel: String = AccountNameLabel,
     val accountNameLength: Int = 20,
     val accountNameKeyboardType: KeyboardType = KeyboardType.Text,
-    val accountNameKeyboardCapitalization: KeyboardCapitalization = KeyboardCapitalization.Sentences
+    val accountNameKeyboardCapitalization: KeyboardCapitalization = KeyboardCapitalization.Sentences,
+    val hasAccountNameValidationError: Boolean = false
 ) : ComponentProps(
     accountName,
     accountNameLabel,
     accountNameLength,
     accountNameKeyboardType,
-    accountNameKeyboardCapitalization
+    accountNameKeyboardCapitalization,
+    hasValidationError = hasAccountNameValidationError
 )
 
 data class PANNumber(
@@ -51,11 +53,13 @@ data class PANNumber(
     val panNumberLabel: String = PANLabel,
     val panNumberLength: Int = 10,
     val panNumberKeyboardType: KeyboardType = KeyboardType.Text,
-    val panNumberKeyboardCapitalization: KeyboardCapitalization = KeyboardCapitalization.Characters
+    val panNumberKeyboardCapitalization: KeyboardCapitalization = KeyboardCapitalization.Characters,
+    val hasPanNumberValidationError: Boolean = false
 ) : ComponentProps(
     panNumber,
     panNumberLabel,
     panNumberLength,
     panNumberKeyboardType,
-    panNumberKeyboardCapitalization
+    panNumberKeyboardCapitalization,
+    hasValidationError = hasPanNumberValidationError
 )

@@ -43,13 +43,24 @@ class BankFormViewModel @Inject constructor() : ViewModel() {
 
     private fun validateInputs() {
         val accountNumberResult = Validator.validateAccountNumber(_uiState.value.accountNumber)
+        val accountNumber =  _uiState.value.accountNumber.copy(hasAccountNumberValidationError = !accountNumberResult.status)
+        _uiState.value = _uiState.value.copy(accountNumber = accountNumber)
+
         val panResult = Validator.validatePAN(_uiState.value.panNumber)
+
+        val panNumber =  _uiState.value.panNumber.copy(hasPanNumberValidationError = !panResult.status)
+        _uiState.value = _uiState.value.copy(panNumber = panNumber)
+
         val accountNameResult = Validator.validateOwnerName(_uiState.value.accountName)
-        _uiState.value = _uiState.value.copy(
-            hasAccountNumberError = !accountNumberResult.status,
-            hasPANError = !panResult.status,
-            hasNameError = !accountNameResult.status
-        )
+
+        val accountName =  _uiState.value.accountName.copy(hasAccountNameValidationError = !accountNameResult.status)
+        _uiState.value = _uiState.value.copy(accountName = accountName)
+
+//        _uiState.value = _uiState.value.copy(
+//            hasAccountNumberError = !accountNumberResult.status,
+//            hasPANError = !panResult.status,
+//            hasNameError = !accountNameResult.status
+//        )
         val hasError = listOf(
             accountNumberResult,
             panResult,
