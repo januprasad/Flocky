@@ -66,12 +66,12 @@ fun UIScreen(scaffoldState: ScaffoldState) {
     var checkedState by remember { mutableStateOf(false) }
     val localFocus = LocalFocusManager.current
     LaunchedEffect(key1 = scaffoldState) {
-        bankFormViewModel.validationEvent.collectLatest { event ->
+        bankFormViewModel.validationEvent.collect { event ->
             when (event) {
-                is ValidationEvent.Success -> {
+                is UIEvent.ValidationEvent.Success -> {
                     showSnackWrapper(scaffoldState, event.msg)
                 }
-                is ValidationEvent.Failure -> {
+                is UIEvent.ValidationEvent.Failure -> {
                     showSnackWrapper(scaffoldState, event.msg)
                 }
             }

@@ -3,7 +3,7 @@ package com.github.flocky
 import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.text.input.KeyboardType
 
-data class UIState(
+data class UI(
     val accountNumber: AccountNumber = AccountNumber(),
     val panNumber: PANNumber = PANNumber(),
     val accountName: AccountName = AccountName()

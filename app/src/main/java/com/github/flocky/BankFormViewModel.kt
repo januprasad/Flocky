@@ -12,10 +12,10 @@ import javax.inject.Inject
 @HiltViewModel
 class BankFormViewModel @Inject constructor() : ViewModel() {
 
-    private var _uiState = mutableStateOf(UIState())
-    val uiState: State<UIState> = _uiState
+    private var _uiState = mutableStateOf(UI())
+    val uiState: State<UI> = _uiState
 
-    val validationEvent = MutableSharedFlow<ValidationEvent>()
+    val validationEvent = MutableSharedFlow<UIEvent.ValidationEvent>()
 
     /**
      * This method will trigger on user interactions and the impact will be state change of the ui.
@@ -67,9 +67,9 @@ class BankFormViewModel @Inject constructor() : ViewModel() {
         ).any { !it.status }
         viewModelScope.launch {
             if (!hasError) {
-                validationEvent.emit(ValidationEvent.Success(msg = SuccessMessageValidation))
+                validationEvent.emit(UIEvent.ValidationEvent.Success(msg = SuccessMessageValidation))
             } else {
-                validationEvent.emit(ValidationEvent.Failure(msg = ErrorMessageValidation))
+                validationEvent.emit(UIEvent.ValidationEvent.Failure(msg = ErrorMessageValidation))
             }
         }
     }
