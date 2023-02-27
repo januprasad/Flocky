@@ -3,7 +3,10 @@ package com.github.flocky
 object Validator {
 
     fun validateAccountNumber(accountNumber: AccountNumber): ValidationResult {
-        return ValidationResult(accountNumber.value.isNotEmpty() && accountNumber.value.length == accountNumber.length)
+        return ValidationResult(
+            accountNumber.value.isNotEmpty() &&
+                accountNumber.value.length == accountNumber.length
+        )
     }
 
     fun validatePAN(pan: PANNumber): ValidationResult {
